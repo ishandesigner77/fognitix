@@ -1,0 +1,48 @@
+.dock {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  flex: 1;
+  background: var(--fx-bg-panel);
+}
+
+.tabs {
+  display: flex;
+  height: var(--fx-tab-h);
+  background: var(--fx-bg-header);
+  border-bottom: 1px solid var(--fx-border);
+  flex-shrink: 0;
+}
+
+.tab {
+  border: none;
+  background: transparent;
+  color: var(--fx-text-dim);
+  padding: 0 12px;
+  font: inherit;
+  font-size: 11px;
+  cursor: default;
+  border-bottom: 2px solid transparent;
+}
+.tab:hover {
+  color: var(--fx-text);
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.tabOn {
+  color: var(--fx-text);
+  border-bottom-color: var(--fx-accent);
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.body > * {
+  flex: 1;
+  min-width: 0;
+}

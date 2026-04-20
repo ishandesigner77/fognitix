@@ -23,6 +23,17 @@ button {
   font: inherit;
 }
 
+select,
+textarea {
+  font: inherit;
+}
+
+select {
+  color: var(--fx-text);
+  background: var(--fx-bg-input);
+  border: 1px solid var(--fx-border-soft);
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;

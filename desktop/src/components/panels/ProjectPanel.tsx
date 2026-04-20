@@ -1,3 +1,4 @@
+import { Icon } from "../icons/Icon";
 import { PanelFrame } from "./PanelFrame";
 import styles from "./ProjectPanel.module.css";
 
@@ -24,7 +25,10 @@ export function ProjectPanel() {
               <span className={styles.chev} aria-hidden>
                 ▸
               </span>
-              <span className={styles.name}>{name}</span>
+              <span className={styles.nameCell}>
+                <Icon name="folder" size={12} className={styles.folder} />
+                <span className={styles.name}>{name}</span>
+              </span>
               <span className={styles.type}>Folder</span>
             </li>
           ))}

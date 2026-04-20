@@ -42,12 +42,6 @@
   border-color: #3476a3;
 }
 
-.svg {
-  width: 14px;
-  height: 14px;
-  display: block;
-}
-
 .tc {
   font-family: var(--fx-font-mono);
   font-size: 12px;

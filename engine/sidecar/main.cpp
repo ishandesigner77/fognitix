@@ -61,6 +61,54 @@ static void emit(int id, const std::string& body)
     std::cout.flush();
 }
 
+static std::string extractStringValue(const std::string& line, const char* key)
+{
+    const std::string needle = std::string("\"") + key + "\"";
+    const auto p = line.find(needle);
+    if (p == std::string::npos) {
+        return {};
+    }
+    auto colon = line.find(':', p + needle.size());
+    if (colon == std::string::npos) {
+        return {};
+    }
+    std::size_t i = colon + 1;
+    while (i < line.size() && isSpace(static_cast<unsigned char>(line[i]))) {
+        ++i;
+    }
+    if (i >= line.size() || line[i] != '"') {
+        return {};
+    }
+    ++i;
+    std::string out;
+    while (i < line.size()) {
+        const char c = line[i++];
+        if (c == '"') {
+            break;
+        }
+        if (c == '\\' && i < line.size()) {
+            out.push_back(line[i++]);
+        } else {
+            out.push_back(c);
+        }
+    }
+    return out;
+}
+
+static std::string jsonEscape(const std::string& s)
+{
+    std::string o;
+    o.push_back('"');
+    for (char c : s) {
+        if (c == '"' || c == '\\') {
+            o.push_back('\\');
+        }
+        o.push_back(c);
+    }
+    o.push_back('"');
+    return o;
+}
+
 int main()
 {
     std::ios::sync_with_stdio(false);
@@ -76,6 +124,14 @@ int main()
             emit(id, "\"result\":{\"ok\":true}");
         } else if (containsMethod(line, "version")) {
             emit(id, "\"result\":{\"name\":\"fognitix-engine\",\"version\":\"0.1.0\"}");
+        } else if (containsMethod(line, "chat")) {
+            const std::string userText = extractStringValue(line, "text");
+            if (userText.empty()) {
+                emit(id, "\"error\":{\"code\":-32602,\"message\":\"missing text\"}");
+            } else {
+                const std::string reply = std::string("Echo: ") + userText;
+                emit(id, std::string("\"result\":{\"role\":\"assistant\",\"text\":") + jsonEscape(reply) + "}");
+            }
         } else {
             emit(id, "\"error\":{\"code\":-32601,\"message\":\"method not found\"}");
         }

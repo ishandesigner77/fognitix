@@ -1,0 +1,83 @@
+.root {
+  position: relative;
+  align-self: stretch;
+  display: flex;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+  padding: 0 10px;
+  border: none;
+  background: transparent;
+  color: var(--fx-text-dim);
+  cursor: default;
+  font: inherit;
+  font-size: 12px;
+}
+.trigger:hover {
+  color: var(--fx-text);
+  background: rgba(255, 255, 255, 0.05);
+}
+.triggerOn {
+  color: var(--fx-text);
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.chev {
+  opacity: 0.75;
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  min-width: 220px;
+  padding: 4px;
+  border: 1px solid var(--fx-border-soft);
+  background: var(--fx-bg-menu);
+  box-shadow: var(--fx-shadow-pop);
+  z-index: 2000;
+  border-radius: var(--fx-radius);
+}
+
+.item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 8px;
+  border: none;
+  border-radius: var(--fx-radius);
+  background: transparent;
+  color: var(--fx-text);
+  cursor: default;
+  font: inherit;
+  font-size: 11px;
+  text-align: left;
+}
+.item:hover:not(:disabled) {
+  background: var(--fx-bg-menu-hover);
+}
+.item:disabled {
+  color: var(--fx-text-disabled);
+}
+
+.itemLabel {
+  flex: 1;
+}
+
+.shortcut {
+  color: var(--fx-text-disabled);
+  font-variant-numeric: tabular-nums;
+  font-size: 10px;
+}
+
+.sep {
+  height: 1px;
+  margin: 4px 6px;
+  background: var(--fx-divider);
+}

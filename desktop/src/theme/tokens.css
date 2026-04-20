@@ -1,26 +1,40 @@
-/* Design tokens: layout / color inspired by professional motion apps (panel stack, dark chrome). */
+/* Palette (reference swatches): #262626 #242424 #171717 #1C1C1C #1A1A1A */
 :root {
-  --fx-bg-app: #1c1c1c;
-  --fx-bg-panel: #323232;
-  --fx-bg-panel-2: #2b2b2b;
-  --fx-bg-header: #3e3e3e;
-  --fx-bg-input: #262626;
-  --fx-border: #1f1f1f;
-  --fx-border-soft: #454545;
-  --fx-text: #d0d0d0;
-  --fx-text-dim: #9b9b9b;
-  --fx-text-disabled: #6a6a6a;
+  --fx-canvas-0: #171717;
+  --fx-canvas-1: #1a1a1a;
+  --fx-canvas-2: #1c1c1c;
+  --fx-surface-0: #242424;
+  --fx-surface-1: #262626;
+
+  --fx-bg-app: var(--fx-canvas-2);
+  --fx-bg-deep: var(--fx-canvas-0);
+  --fx-bg-panel: var(--fx-surface-1);
+  --fx-bg-panel-2: var(--fx-surface-0);
+  --fx-bg-header: var(--fx-surface-1);
+  --fx-bg-input: #1f1f1f;
+  --fx-bg-menu: var(--fx-surface-1);
+  --fx-bg-menu-hover: #2e2e2e;
+
+  --fx-border: #141414;
+  --fx-border-soft: #1a1a1a;
+  --fx-divider: #242424;
+
+  --fx-text: #e2e2e2;
+  --fx-text-dim: #a3a3a3;
+  --fx-text-disabled: #6f6f6f;
   --fx-accent: #53b4ff;
-  --fx-accent-hot: #7cc8ff;
-  --fx-selection: #406e8a;
+  --fx-accent-hot: #8ccaff;
+  --fx-selection: #3a5a72;
   --fx-cti: #d65a51;
-  --fx-row-alt: #2e2e2e;
-  --fx-track: #242424;
-  --fx-comp-bg: #0a0a0a;
+  --fx-row-alt: #202020;
+  --fx-track: var(--fx-surface-0);
+  --fx-comp-bg: #0f0f0f;
+
   --fx-font: "Segoe UI", system-ui, -apple-system, sans-serif;
   --fx-font-mono: "Cascadia Mono", "Consolas", ui-monospace, monospace;
-  --fx-radius: 1px;
+  --fx-radius: 2px;
   --fx-menu-h: 28px;
-  --fx-tool-w: 32px;
-  --fx-tab-h: 22px;
+  --fx-tool-w: 34px;
+  --fx-tab-h: 24px;
+  --fx-shadow-pop: 0 10px 28px rgba(0, 0, 0, 0.55);
 }

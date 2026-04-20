@@ -1,12 +1,14 @@
+import type { IconName } from "../icons/Icon";
+import { Icon } from "../icons/Icon";
 import styles from "./ToolRail.module.css";
 
-const TOOLS = [
-  { id: "selection", label: "Selection", hotkey: "V" },
-  { id: "hand", label: "Hand", hotkey: "H" },
-  { id: "zoom", label: "Zoom", hotkey: "Z" },
-  { id: "rotation", label: "Rotation", hotkey: "W" },
-  { id: "pen", label: "Pen", hotkey: "G" },
-  { id: "text", label: "Text", hotkey: "T" },
+const TOOLS: readonly { id: string; icon: IconName; label: string; hotkey: string }[] = [
+  { id: "selection", icon: "cursor", label: "Selection", hotkey: "V" },
+  { id: "hand", icon: "hand", label: "Hand", hotkey: "H" },
+  { id: "zoom", icon: "zoom", label: "Zoom", hotkey: "Z" },
+  { id: "rotation", icon: "rotate", label: "Rotation", hotkey: "W" },
+  { id: "pen", icon: "pen", label: "Pen", hotkey: "G" },
+  { id: "text", icon: "text", label: "Text", hotkey: "T" },
 ] as const;
 
 export function ToolRail() {
@@ -19,7 +21,7 @@ export function ToolRail() {
           className={`${styles.tool} ${i === 0 ? styles.toolActive : ""}`}
           title={`${t.label} (${t.hotkey})`}
         >
-          <span className={styles.hotkey}>{t.hotkey}</span>
+          <Icon name={t.icon} size={15} />
         </button>
       ))}
       <div className={styles.spacer} />

@@ -32,6 +32,19 @@
   padding: 2px 0;
 }
 
+.nameCell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.folder {
+  color: #c9b24a;
+  flex-shrink: 0;
+  opacity: 0.95;
+}
+
 .row {
   display: grid;
   grid-template-columns: 14px 1fr 64px;

@@ -4,9 +4,46 @@ import styles from "./InspectorPanel.module.css";
 type Props = {
   engineDetail: string;
   onRetest: () => void;
+  /** When embedded inside `RightDock`, omit outer panel chrome. */
+  frameless?: boolean;
 };
 
-export function InspectorPanel({ engineDetail, onRetest }: Props) {
+function InspectorBody({ engineDetail, onRetest }: Pick<Props, "engineDetail" | "onRetest">) {
+  return (
+    <div className={styles.wrap}>
+      <div className={styles.group}>
+        <div className={styles.groupHead}>Engine bridge</div>
+        <div className={styles.row}>
+          <span className={styles.label}>Status</span>
+          <button type="button" className={styles.link} onClick={onRetest}>
+            Ping again
+          </button>
+        </div>
+        <pre className={styles.pre}>{engineDetail || "—"}</pre>
+      </div>
+      <div className={styles.group}>
+        <div className={styles.groupHead}>Transform</div>
+        <div className={styles.prop}>
+          <span className={styles.pLabel}>Anchor Point</span>
+          <span className={styles.pValue}>960.0, 540.0</span>
+        </div>
+        <div className={styles.prop}>
+          <span className={styles.pLabel}>Position</span>
+          <span className={styles.pValue}>960.0, 540.0</span>
+        </div>
+        <div className={styles.prop}>
+          <span className={styles.pLabel}>Scale</span>
+          <span className={styles.pValue}>100.0, 100.0%</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function InspectorPanel({ engineDetail, onRetest, frameless }: Props) {
+  if (frameless) {
+    return <InspectorBody engineDetail={engineDetail} onRetest={onRetest} />;
+  }
   return (
     <PanelFrame
       title="Effect Controls"
@@ -16,33 +53,7 @@ export function InspectorPanel({ engineDetail, onRetest }: Props) {
       ]}
       activeTab="fx"
     >
-      <div className={styles.wrap}>
-        <div className={styles.group}>
-          <div className={styles.groupHead}>Engine bridge</div>
-          <div className={styles.row}>
-            <span className={styles.label}>Status</span>
-            <button type="button" className={styles.link} onClick={onRetest}>
-              Ping again
-            </button>
-          </div>
-          <pre className={styles.pre}>{engineDetail || "—"}</pre>
-        </div>
-        <div className={styles.group}>
-          <div className={styles.groupHead}>Transform</div>
-          <div className={styles.prop}>
-            <span className={styles.pLabel}>Anchor Point</span>
-            <span className={styles.pValue}>960.0, 540.0</span>
-          </div>
-          <div className={styles.prop}>
-            <span className={styles.pLabel}>Position</span>
-            <span className={styles.pValue}>960.0, 540.0</span>
-          </div>
-          <div className={styles.prop}>
-            <span className={styles.pLabel}>Scale</span>
-            <span className={styles.pValue}>100.0, 100.0%</span>
-          </div>
-        </div>
-      </div>
+      <InspectorBody engineDetail={engineDetail} onRetest={onRetest} />
     </PanelFrame>
   );
 }
