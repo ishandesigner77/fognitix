@@ -1,0 +1,47 @@
+<RCC>
+  <qresource prefix="/shaders">
+    <file>shaders/color/lut3d.glsl</file>
+    <file>shaders/color/curves.glsl</file>
+    <file>shaders/color/colorwheels.glsl</file>
+    <file>shaders/color/hsl.glsl</file>
+    <file>shaders/color/exposure.glsl</file>
+    <file>shaders/color/contrast.glsl</file>
+    <file>shaders/color/saturation.glsl</file>
+    <file>shaders/color/colorbalance.glsl</file>
+    <file>shaders/color/splittoning.glsl</file>
+    <file>shaders/color/filmemulation.glsl</file>
+    <file>shaders/color/colorspace.glsl</file>
+    <file>shaders/effects/chromatic.glsl</file>
+    <file>shaders/effects/filmgrain.glsl</file>
+    <file>shaders/effects/vignette.glsl</file>
+    <file>shaders/effects/lensflare.glsl</file>
+    <file>shaders/effects/glow.glsl</file>
+    <file>shaders/effects/bloom.glsl</file>
+    <file>shaders/effects/blur_gaussian.glsl</file>
+    <file>shaders/effects/blur_motion.glsl</file>
+    <file>shaders/effects/blur_radial.glsl</file>
+    <file>shaders/effects/blur_tiltshift.glsl</file>
+    <file>shaders/effects/sharpen.glsl</file>
+    <file>shaders/effects/glitch.glsl</file>
+    <file>shaders/effects/vhs.glsl</file>
+    <file>shaders/effects/hologram.glsl</file>
+    <file>shaders/effects/pixelsort.glsl</file>
+    <file>shaders/effects/datamosh.glsl</file>
+    <file>shaders/effects/lightleak.glsl</file>
+    <file>shaders/effects/halation.glsl</file>
+    <file>shaders/effects/depthofField.glsl</file>
+    <file>shaders/transitions/dissolve.glsl</file>
+    <file>shaders/transitions/whippan.glsl</file>
+    <file>shaders/transitions/zoomblur.glsl</file>
+    <file>shaders/transitions/rgbsplit.glsl</file>
+    <file>shaders/transitions/lumafade.glsl</file>
+    <file>shaders/transitions/glitch_transition.glsl</file>
+    <file>shaders/transitions/shatter.glsl</file>
+    <file>shaders/transitions/pageturn.glsl</file>
+    <file>shaders/transitions/lightflash.glsl</file>
+    <file>shaders/text/typewriter.glsl</file>
+    <file>shaders/text/glitchtext.glsl</file>
+    <file>shaders/text/neontext.glsl</file>
+    <file>shaders/text/liquidtext.glsl</file>
+  </qresource>
+</RCC>

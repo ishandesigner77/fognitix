@@ -1,0 +1,13 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+  "name": "fognitix",
+  "version": "0.1.0",
+  "description": "Fognitix — professional desktop video editor",
+  "builtin-baseline": "256acc64012b23a13041d8705805e1f23b43a024",
+  "dependencies": [
+    "ffmpeg",
+    "portaudio",
+    "libsoundio",
+    "sqlite3"
+  ]
+}

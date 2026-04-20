@@ -1,0 +1,26 @@
+/* Design tokens: layout / color inspired by professional motion apps (panel stack, dark chrome). */
+:root {
+  --fx-bg-app: #1c1c1c;
+  --fx-bg-panel: #323232;
+  --fx-bg-panel-2: #2b2b2b;
+  --fx-bg-header: #3e3e3e;
+  --fx-bg-input: #262626;
+  --fx-border: #1f1f1f;
+  --fx-border-soft: #454545;
+  --fx-text: #d0d0d0;
+  --fx-text-dim: #9b9b9b;
+  --fx-text-disabled: #6a6a6a;
+  --fx-accent: #53b4ff;
+  --fx-accent-hot: #7cc8ff;
+  --fx-selection: #406e8a;
+  --fx-cti: #d65a51;
+  --fx-row-alt: #2e2e2e;
+  --fx-track: #242424;
+  --fx-comp-bg: #0a0a0a;
+  --fx-font: "Segoe UI", system-ui, -apple-system, sans-serif;
+  --fx-font-mono: "Cascadia Mono", "Consolas", ui-monospace, monospace;
+  --fx-radius: 1px;
+  --fx-menu-h: 28px;
+  --fx-tool-w: 32px;
+  --fx-tab-h: 22px;
+}

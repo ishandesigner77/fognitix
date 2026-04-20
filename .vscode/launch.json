@@ -1,0 +1,49 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Fognitix (Release)",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/windows-release/Fognitix.exe",
+            "cwd": "${workspaceFolder}/build/windows-release",
+            "environment": [
+                {
+                    "name": "PATH",
+                    "value": "${workspaceFolder}/build/windows-release/vcpkg_installed/x64-windows/bin;D:/Qt/6.8.3/msvc2022_64/bin;${env:PATH}"
+                },
+                {
+                    "name": "QT_QPA_PLATFORM_PLUGIN_PATH",
+                    "value": "D:/Qt/6.8.3/msvc2022_64/plugins"
+                }
+            ],
+            "stopAtEntry": false
+        },
+        {
+            "name": "Fognitix (Release, software render)",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/windows-release/Fognitix.exe",
+            "cwd": "${workspaceFolder}/build/windows-release",
+            "environment": [
+                {
+                    "name": "PATH",
+                    "value": "${workspaceFolder}/build/windows-release/vcpkg_installed/x64-windows/bin;D:/Qt/6.8.3/msvc2022_64/bin;${env:PATH}"
+                },
+                {
+                    "name": "QT_QPA_PLATFORM_PLUGIN_PATH",
+                    "value": "D:/Qt/6.8.3/msvc2022_64/plugins"
+                },
+                {
+                    "name": "FOGNITIX_SOFTWARE_GL",
+                    "value": "1"
+                },
+                {
+                    "name": "QSG_RHI_BACKEND",
+                    "value": "software"
+                }
+            ],
+            "stopAtEntry": false
+        }
+    ]
+}

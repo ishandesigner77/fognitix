@@ -1,0 +1,103 @@
+import QtQuick
+
+QtObject {
+    // Transport (text — avoids emoji-style pictographs in embedded fonts)
+    readonly property string play:          ">"
+    readonly property string pause:         "||"
+    readonly property string stop:          "[]"
+    readonly property string stepBack:      "<<"
+    readonly property string stepForward:   ">>"
+    readonly property string loop:          "Loop"
+    readonly property string record:        "Rec"
+
+    // Timeline edit tools (glyphs — toolbar)
+    readonly property string toolSelect:     "V"
+    readonly property string toolTrackSelect: "A"
+    readonly property string toolRazor:       "C"
+    readonly property string toolRipple:     "B"
+    readonly property string toolRolling:   "N"
+    readonly property string toolSlip:      "Y"
+    readonly property string toolSlide:     "U"
+    readonly property string toolSnap:      "S"
+    readonly property string toolSplit:     "K"
+    readonly property string toolLink:     "L"
+    readonly property string toolMarker:   "M"
+
+    // Tools
+    readonly property string select:        "V"
+    readonly property string move:          "M"
+    readonly property string pen:           "P"
+    readonly property string type:          "T"
+    readonly property string shape:         "R"
+    readonly property string ellipse:       "E"
+    readonly property string puppet:        "U"
+    readonly property string brush:         "B"
+    readonly property string eraser:        "X"
+    readonly property string eyedropper:    "I"
+    readonly property string zoom:          "Z"
+    readonly property string hand:          "H"
+    readonly property string camera:        "Cam"
+    readonly property string mask:          "Msk"
+    readonly property string roto:          "Rto"
+
+    // Media/Project
+    readonly property string folder:        ">"
+    readonly property string file:          "f"
+    readonly property string video:         "Vid"
+    readonly property string audio:        "Aud"
+    readonly property string image:         "Img"
+    readonly property string import_:       "In"
+    readonly property string export_:       "Out"
+    readonly property string newComp:       "+"
+    readonly property string delete_:       "Del"
+
+    // Timeline
+    readonly property string keyframe:      "K"
+    readonly property string keyframeAdd:   "k"
+    readonly property string easeIn:        ">"
+    readonly property string easeOut:       "<"
+    readonly property string visible:       "o"
+    readonly property string hidden:        "x"
+    readonly property string lock:          "#"
+    readonly property string unlock:        "u"
+    readonly property string solo:          "S"
+    readonly property string mute:          "M"
+    readonly property string expand:        "v"
+    readonly property string collapse:      ">"
+    readonly property string trackVideo:    "V"
+    readonly property string trackAudio:    "A"
+    readonly property string trackText:     "T"
+    readonly property string trackAdj:      "Fx"
+
+    // Effects
+    readonly property string effect:        "Fx"
+    readonly property string blur:          "Bl"
+    readonly property string color:         "Col"
+    readonly property string glow:          "Gl"
+    readonly property string warp:          "Wr"
+    readonly property string transition:    "Tr"
+
+    // AI
+    readonly property string ai:            "AI"
+    readonly property string send:          ">"
+    readonly property string sparkle:       "*"
+    readonly property string thinking:      "..."
+    readonly property string context:       "@"
+
+    // General UI
+    readonly property string settings:      "Set"
+    readonly property string search:        "?"
+    readonly property string close:         "X"
+    readonly property string add:           "+"
+    readonly property string chevronDown:   "v"
+    readonly property string chevronRight:  ">"
+    readonly property string more:          "..."
+    readonly property string menuHamburger: "="
+    readonly property string warning:       "!"
+    readonly property string info:          "i"
+    readonly property string check:         "OK"
+    readonly property string link:          "~"
+    readonly property string split:         "|"
+    readonly property string undo:          "Undo"
+    readonly property string redo:          "Redo"
+}
