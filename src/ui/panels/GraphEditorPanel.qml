@@ -185,9 +185,9 @@ Rectangle {
                     var cp2 = {x: gw * 0.55, y: gh * 0.1}
                     var p3 = {x: gw - 20, y: gh * 0.35}
 
-                    ctx.strokeStyle = "#d4c9b0"
+                    ctx.strokeStyle = "#47a8ff"
                     ctx.lineWidth = 2
-                    ctx.shadowColor = "#d4c9b0"
+                    ctx.shadowColor = "#47a8ff"
                     ctx.shadowBlur = 4
                     ctx.beginPath()
                     ctx.moveTo(p0.x, p0.y)
@@ -196,7 +196,7 @@ Rectangle {
                     ctx.shadowBlur = 0
 
                     // Key point circles
-                    ctx.fillStyle = "#d4c9b0"
+                    ctx.fillStyle = "#47a8ff"
                     ctx.beginPath(); ctx.arc(p0.x, p0.y, 4, 0, Math.PI*2); ctx.fill()
                     ctx.beginPath(); ctx.arc(p3.x, p3.y, 4, 0, Math.PI*2); ctx.fill()
 
@@ -236,7 +236,7 @@ Rectangle {
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
                 height: 20
-                color: "#181818"
+                color: theme.colors.panelAlt
                 border.width: 1; border.color: theme.colors.borderSoft
 
                 Row {

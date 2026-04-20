@@ -11,15 +11,20 @@ Item {
 
     Theme { id: theme }
 
+    Rectangle {
+        anchors.fill: parent
+        color: theme.colors.appBg
+    }
+
     // ── Layout geometry ──────────────────────────────────────────────────────
-    property int  leftDockInnerW:  320
+    property int  leftDockInnerW:  300
     property int  midInspectorW:   240
-    property int  rightDockW:      400
+    property int  rightDockW:      380
     property bool showLeftBody:    true
-    property bool showMidInspector: true
+    property bool showMidInspector: false
     property bool showRightColumn: true
     property bool rightExpanded:   true
-    property real previewRatio:    0.62
+    property real previewRatio:    0.60
 
     // ── Tool / snap state (consumed by TimelinePanel) ─────────────────────
     property int  activeTool:  0
@@ -157,14 +162,14 @@ Item {
     }
 
     function resetWindowLayout() {
-        leftDockInnerW = 320
+        leftDockInnerW = 300
         midInspectorW = 240
-        rightDockW = 400
+        rightDockW = 380
         showLeftBody = true
-        showMidInspector = true
+        showMidInspector = false
         showRightColumn = true
         rightExpanded = true
-        previewRatio = 0.62
+        previewRatio = 0.60
         leftActivePanels.clear()
         leftActivePanels.append({ panelId: 0,  panelName: "Project" })
         leftActivePanels.append({ panelId: 1,  panelName: "Media" })
@@ -194,7 +199,7 @@ Item {
             const L = mainWindow.loadEditorLayout()
             if (L.leftInner !== undefined)  leftDockInnerW   = Math.max(200, Math.min(420, L.leftInner))
             if (L.midW     !== undefined)   midInspectorW    = Math.max(180, Math.min(360, L.midW))
-            if (L.rightW   !== undefined)   rightDockW       = Math.max(320, Math.min(640, L.rightW))
+            if (L.rightW   !== undefined)   rightDockW       = Math.max(320, Math.min(680, L.rightW))
             if (L.showLeftBody !== undefined) showLeftBody   = L.showLeftBody
             if (L.showMid  !== undefined)   showMidInspector = L.showMid
             if (L.showRight !== undefined)  showRightColumn  = L.showRight
@@ -304,6 +309,7 @@ Item {
     onShowMidInspectorChanged: scheduleSaveLayout()
     onShowRightColumnChanged: scheduleSaveLayout()
     onRightExpandedChanged:   scheduleSaveLayout()
+    onPreviewRatioChanged:    scheduleSaveLayout()
 
     Connections {
         target: mainWindow
@@ -470,28 +476,37 @@ Item {
         anchors.fill: parent
         spacing: 0
 
-        // ── Top chrome bar ────────────────────────────────────────────────
+        // ── Top chrome bar (Resolve / Premiere–class density) ───────────────
         Rectangle {
             Layout.fillWidth: true
-            height: 40
+            height: 42
             color: theme.colors.menuBarBackground
+
+            Rectangle {
+                anchors.top: parent.top
+                width: parent.width
+                height: 1
+                color: theme.colors.borderSoft
+                opacity: 0.85
+            }
 
             RowLayout {
                 anchors.fill: parent
-                anchors.leftMargin: 8
-                anchors.rightMargin: 8
-                spacing: 6
+                anchors.leftMargin: 10
+                anchors.rightMargin: 10
+                spacing: 8
 
-                // Import / Edit / Export segment
+                // Import / Edit / Export pill
                 Row {
                     spacing: 0
-                    height: 28
+                    height: 30
                     Layout.alignment: Qt.AlignVCenter
 
                     Rectangle {
                         width: segImport.implicitWidth + segEdit.implicitWidth + segExport.implicitWidth + 4
-                        height: 28
-                        color: theme.colors.primaryBackground
+                        height: 30
+                        radius: 4
+                        color: theme.colors.timelineBg
                         border.color: theme.colors.borderSubtle
                         border.width: 1
                         Row {
@@ -500,42 +515,88 @@ Item {
                             ToolButton {
                                 id: segImport
                                 flat: true
-                                implicitWidth: 72; implicitHeight: 26
+                                implicitWidth: 68
+                                implicitHeight: 28
                                 text: qsTr("Import")
                                 font.pixelSize: theme.typography.caption
+                                font.weight: Font.Medium
                                 onClicked: if (root.openImportFn) root.openImportFn()
                                 ToolTip.text: qsTr("Import media"); ToolTip.visible: hovered
+                                background: Rectangle {
+                                    radius: 3
+                                    color: segImport.hovered ? theme.colors.surfaceHigh : "transparent"
+                                }
+                                contentItem: Text {
+                                    text: segImport.text
+                                    font: segImport.font
+                                    color: theme.colors.textMuted
+                                    horizontalAlignment: Text.AlignHCenter
+                                    verticalAlignment: Text.AlignVCenter
+                                }
                             }
-                            Rectangle { width: 1; height: 18; color: theme.colors.borderSubtle; anchors.verticalCenter: parent.verticalCenter }
+                            Rectangle {
+                                width: 1
+                                height: 16
+                                color: theme.colors.borderSubtle
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
                             Rectangle {
                                 id: segEdit
-                                implicitWidth: 60; implicitHeight: 26
-                                color: theme.colors.surfaceRaised
-                                border.width: 1; border.color: theme.colors.borderSoft
+                                implicitWidth: 58
+                                implicitHeight: 28
+                                radius: 3
+                                color: theme.colors.accentMuted
+                                border.width: 1
+                                border.color: theme.colors.borderFocusRing
                                 Label {
                                     anchors.centerIn: parent
                                     text: qsTr("Edit")
                                     font.pixelSize: theme.typography.caption
-                                    font.weight: Font.Medium
-                                    color: theme.colors.textPrimary
+                                    font.weight: Font.Bold
+                                    color: theme.colors.accent
                                 }
                             }
-                            Rectangle { width: 1; height: 18; color: theme.colors.borderSubtle; anchors.verticalCenter: parent.verticalCenter }
+                            Rectangle {
+                                width: 1
+                                height: 16
+                                color: theme.colors.borderSubtle
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
                             ToolButton {
                                 id: segExport
                                 flat: true
-                                implicitWidth: 76; implicitHeight: 26
+                                implicitWidth: 70
+                                implicitHeight: 28
                                 text: qsTr("Export")
                                 font.pixelSize: theme.typography.caption
+                                font.weight: Font.Medium
                                 onClicked: if (root.openExportFn) root.openExportFn()
                                 ToolTip.text: qsTr("Export / render"); ToolTip.visible: hovered
+                                background: Rectangle {
+                                    radius: 3
+                                    color: segExport.hovered ? theme.colors.surfaceHigh : "transparent"
+                                }
+                                contentItem: Text {
+                                    text: segExport.text
+                                    font: segExport.font
+                                    color: theme.colors.textMuted
+                                    horizontalAlignment: Text.AlignHCenter
+                                    verticalAlignment: Text.AlignVCenter
+                                }
                             }
                         }
                     }
                 }
 
+                Rectangle {
+                    width: 1
+                    height: 18
+                    color: theme.colors.borderSubtle
+                    Layout.alignment: Qt.AlignVCenter
+                }
+
                 Label {
-                    text: mainWindow ? mainWindow.projectName : qsTr("Untitled")
+                    text: mainWindow ? mainWindow.projectName : qsTr("Untitled Project")
                     color: theme.colors.textPrimary
                     font.pixelSize: theme.typography.caption
                     font.weight: Font.Medium
@@ -544,27 +605,23 @@ Item {
                     Layout.maximumWidth: 200
                 }
 
-                Rectangle { width: 1; height: 16; color: theme.colors.borderSubtle; Layout.alignment: Qt.AlignVCenter }
+                Rectangle { width: 1; height: 14; color: theme.colors.borderSubtle; Layout.alignment: Qt.AlignVCenter }
 
                 Label {
-                    text: (mainWindow ? mainWindow.trackCount : 0) + "  \u00B7  " + (mainWindow ? mainWindow.clipCount : 0) + " clips"
-                    color: theme.colors.textSecondary
+                    text: qsTr("%1 tracks · %2 clips").arg(mainWindow ? mainWindow.trackCount : 0).arg(mainWindow ? mainWindow.clipCount : 0)
+                    color: theme.colors.textDisabled
                     font.pixelSize: theme.typography.micro
                     Layout.alignment: Qt.AlignVCenter
                 }
 
-                Item { Layout.fillWidth: true; Layout.maximumWidth: 120 }
+                Item { Layout.fillWidth: true }
 
-                Item { Layout.fillWidth: true; Layout.maximumWidth: 380 }
-
-                Item { Layout.fillWidth: true; Layout.maximumWidth: 120 }
-
-                // Panel toggle buttons — clean text labels, no unicode squares
+                // Panel toggle buttons
                 Repeater {
                     model: [
                         { label: qsTr("Panels"),    prop: "showLeftBody" },
                         { label: qsTr("Inspector"), prop: "showMidInspector" },
-                        { label: qsTr("AI"),        prop: "showRightColumn" }
+                        { label: qsTr("AI Chat"),    prop: "showRightColumn" }
                     ]
                     delegate: ToolButton {
                         required property var modelData
@@ -572,8 +629,8 @@ Item {
                         Layout.alignment: Qt.AlignVCenter
                         checkable: true
                         checked: index === 0 ? root.showLeftBody : (index === 1 ? root.showMidInspector : root.showRightColumn)
-                        implicitHeight: 26
-                        implicitWidth: labelItem.implicitWidth + 20
+                        implicitHeight: 28
+                        implicitWidth: labelItem.implicitWidth + 22
                         ToolTip.text: qsTr("Toggle") + " " + modelData.label; ToolTip.visible: hovered
                         onClicked: {
                             if (index === 0) root.showLeftBody = !root.showLeftBody
@@ -581,10 +638,10 @@ Item {
                             else root.showRightColumn = !root.showRightColumn
                         }
                         background: Rectangle {
-                            radius: 3
+                            radius: 4
                             color: parent.checked ? theme.colors.accentMuted : (parent.hovered ? theme.colors.surfaceHigh : "transparent")
                             border.width: parent.checked ? 1 : 0
-                            border.color: theme.colors.borderSoft
+                            border.color: parent.checked ? theme.colors.borderFocusRing : theme.colors.borderSoft
                         }
                         contentItem: Text {
                             id: labelItem
@@ -598,39 +655,58 @@ Item {
                     }
                 }
 
-                // AI Agent button
-                ToolButton {
+                Rectangle {
                     Layout.alignment: Qt.AlignVCenter
-                    implicitHeight: 28; implicitWidth: 82
-                    text: qsTr("AI Agent")
-                    font.pixelSize: theme.typography.caption; font.weight: Font.Medium
-                    ToolTip.text: qsTr("Open AI panel"); ToolTip.visible: hovered
-                    onClicked: root.focusAI()
-                    background: Rectangle {
-                        color: parent.hovered ? theme.colors.accentMuted : theme.colors.surfaceRaised
-                        border.color: theme.colors.borderSoft; border.width: 1
+                    height: 30
+                    width: aiAgentRow.implicitWidth + 20
+                    radius: 4
+                    color: aiAgentHover.hovered ? theme.colors.accentMuted : theme.colors.surfaceRaised
+                    border.width: 1
+                    border.color: aiAgentHover.hovered ? theme.colors.borderFocusRing : theme.colors.borderSoft
+
+                    HoverHandler { id: aiAgentHover }
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: root.focusAI()
                     }
-                    contentItem: Row {
-                        spacing: 5; anchors.centerIn: parent
+
+                    Row {
+                        id: aiAgentRow
+                        anchors.centerIn: parent
+                        spacing: 7
                         Rectangle {
-                            width: 6; height: 6; radius: 0; anchors.verticalCenter: parent.verticalCenter
+                            width: 7
+                            height: 7
+                            radius: 3.5
+                            anchors.verticalCenter: parent.verticalCenter
                             color: mainWindow && mainWindow.aiBusy ? theme.colors.warning : theme.colors.success
                         }
                         Text {
-                            text: parent.parent.text; font: parent.parent.font
-                            color: theme.colors.textPrimary; anchors.verticalCenter: parent.verticalCenter
+                            text: qsTr("AI Agent")
+                            font.pixelSize: theme.typography.caption
+                            font.weight: Font.Medium
+                            color: theme.colors.accentText
+                            anchors.verticalCenter: parent.verticalCenter
                         }
                     }
                 }
 
                 // Workspace + preview — Fusion ComboBox (bounded popup); avoids broken Menu.popup layout
+                Rectangle {
+                    width: 1
+                    height: 14
+                    color: theme.colors.borderSubtle
+                    Layout.alignment: Qt.AlignVCenter
+                }
+
                 Row {
                     spacing: 6
                     Layout.alignment: Qt.AlignVCenter
                     Layout.maximumWidth: 260
                     ComboBox {
                         id: wsCombo
-                        implicitHeight: 26
+                        implicitHeight: 28
                         implicitWidth: 124
                         Layout.maximumWidth: 140
                         padding: 6
@@ -646,6 +722,18 @@ Item {
                             implicitHeight: 26
                             text: wsCombo.textAt(index)
                             font.pixelSize: 11
+                            background: Rectangle {
+                                implicitWidth: parent.width
+                                implicitHeight: 26
+                                color: parent.highlighted ? theme.colors.surfacePeak : theme.colors.chromePopup
+                            }
+                            contentItem: Text {
+                                text: parent.text
+                                font: parent.font
+                                color: theme.colors.textPrimary
+                                verticalAlignment: Text.AlignVCenter
+                                leftPadding: 8
+                            }
                         }
                         background: Rectangle {
                             radius: 4
@@ -685,7 +773,7 @@ Item {
                     }
                     ComboBox {
                         id: pqCombo
-                        implicitHeight: 26
+                        implicitHeight: 28
                         implicitWidth: 84
                         Layout.maximumWidth: 96
                         padding: 6
@@ -701,6 +789,18 @@ Item {
                             implicitHeight: 26
                             text: pqCombo.textAt(index)
                             font.pixelSize: 11
+                            background: Rectangle {
+                                implicitWidth: parent.width
+                                implicitHeight: 26
+                                color: parent.highlighted ? theme.colors.surfacePeak : theme.colors.chromePopup
+                            }
+                            contentItem: Text {
+                                text: parent.text
+                                font: parent.font
+                                color: theme.colors.textSecondary
+                                verticalAlignment: Text.AlignVCenter
+                                leftPadding: 8
+                            }
                         }
                         background: Rectangle {
                             radius: 4
@@ -743,7 +843,7 @@ Item {
                 ToolButton {
                     id: settingsBtn
                     Layout.alignment: Qt.AlignVCenter
-                    implicitHeight: 26
+                    implicitHeight: 28
                     implicitWidth: 76
                     ToolTip.text: qsTr("Settings"); ToolTip.visible: hovered
                     onClicked: {
@@ -775,18 +875,20 @@ Item {
                 ToolButton {
                     id: userBtn
                     Layout.alignment: Qt.AlignVCenter
-                    implicitHeight: 26
-                    implicitWidth: 32
+                    implicitHeight: 30
+                    implicitWidth: 30
                     ToolTip.text: qsTr("User profile"); ToolTip.visible: hovered
+                    flat: true
                     background: Rectangle {
-                        radius: 13
-                        color: userBtn.hovered ? theme.colors.surfacePeak : theme.colors.chromePopup
+                        radius: 15
+                        color: userBtn.hovered ? theme.colors.accentMuted : theme.colors.surfaceRaised
                         border.width: 1
-                        border.color: theme.colors.chromePopupBorder
+                        border.color: userBtn.hovered ? theme.colors.borderFocusRing : theme.colors.borderSoft
                     }
                     contentItem: Text {
-                        text: "\u25CF"
-                        font.pixelSize: 10
+                        text: qsTr("U")
+                        font.pixelSize: 11
+                        font.weight: Font.Bold
                         color: theme.colors.accent
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
@@ -803,11 +905,16 @@ Item {
             orientation: Qt.Horizontal
             Layout.fillWidth: true; Layout.fillHeight: true
 
-            handle: Rectangle {
-                implicitWidth: 4
-                color: SplitHandle.pressed ? theme.colors.splitterActive
-                     : SplitHandle.hovered ? theme.colors.splitterHover : theme.colors.splitter
-                Behavior on color { ColorAnimation { duration: 100 } }
+            handle: Item {
+                implicitWidth: 3
+                Rectangle {
+                    anchors.centerIn: parent
+                    width: 1
+                    height: parent.height
+                    color: SplitHandle.pressed ? theme.colors.splitterActive
+                         : SplitHandle.hovered ? theme.colors.chromeEdge : theme.colors.splitter
+                    Behavior on color { ColorAnimation { duration: 80 } }
+                }
             }
 
             // ── Left dock ─────────────────────────────────────────────────
@@ -832,7 +939,7 @@ Item {
 
                         // Tab bar
                         Rectangle {
-                            Layout.fillWidth: true; height: 32
+                            Layout.fillWidth: true; height: 34
                             color: theme.colors.surfaceRaised
 
                             RowLayout {
@@ -842,7 +949,7 @@ Item {
 
                                 // Scrollable tab area
                                 Item {
-                                    Layout.fillWidth: true; height: 32; clip: true
+                                    Layout.fillWidth: true; height: 34; clip: true
                                     Flickable {
                                         anchors.fill: parent
                                         flickableDirection: Flickable.HorizontalFlick
@@ -850,7 +957,7 @@ Item {
                                         clip: true; interactive: contentWidth > width
                                         Row {
                                             id: tabRow
-                                            height: 32; spacing: 0
+                                            height: 34; spacing: 0
                                             Repeater {
                                                 model: leftActivePanels
                                                 delegate: Item {
@@ -859,8 +966,8 @@ Item {
                                                     required property int panelId
                                                     required property string panelName
                                                     property real _dragStartX: 0
-                                                    width: Math.max(72, tabLabel.implicitWidth + 28)
-                                                    height: 32
+                                                    width: Math.max(74, tabLabel.implicitWidth + 30)
+                                                    height: 34
                                                     readonly property bool sel: root.leftCurrentId === panelId
                                                     HoverHandler { id: tabHover }
                                                     Rectangle {
@@ -1000,8 +1107,10 @@ Item {
                                 spacing: 3
                                 Repeater {
                                     model: [
-                                        { pid: 1,  short: qsTr("Md"), tip: qsTr("Media pool") },
-                                        { pid: 6,  short: qsTr("Fx"), tip: qsTr("Effects") }
+                                        { pid: 1,  short: qsTr("Media"),   tip: qsTr("Media Pool") },
+                                        { pid: 6,  short: qsTr("Effects"), tip: qsTr("Effects Browser") },
+                                        { pid: 22, short: qsTr("Audio"),   tip: qsTr("Audio Mixer") },
+                                        { pid: 11, short: qsTr("Color"),   tip: qsTr("Color Panel") }
                                     ]
                                     delegate: ToolButton {
                                         required property var modelData
@@ -1013,7 +1122,6 @@ Item {
                                         text: modelData.short
                                         font.pixelSize: 10
                                         font.weight: Font.Medium
-                                        font.family: "Consolas, monospace"
                                         ToolTip.text: modelData.tip
                                         ToolTip.visible: hovered
                                         ToolTip.delay: 400
@@ -1085,11 +1193,16 @@ Item {
                 SplitView.fillWidth: true
                 SplitView.minimumWidth: 480
 
-                handle: Rectangle {
+                handle: Item {
                     implicitHeight: 4
-                    color: SplitHandle.pressed ? theme.colors.splitterActive
-                         : SplitHandle.hovered ? theme.colors.splitterHover : theme.colors.splitter
-                    Behavior on color { ColorAnimation { duration: 100 } }
+                    Rectangle {
+                        anchors.centerIn: parent
+                        width: parent.width
+                        height: 1
+                        color: SplitHandle.pressed ? theme.colors.splitterActive
+                             : SplitHandle.hovered ? theme.colors.chromeEdge : theme.colors.splitter
+                        Behavior on color { ColorAnimation { duration: 80 } }
+                    }
                 }
 
                 Item {
@@ -1104,6 +1217,11 @@ Item {
                     editorChrome: root
                     SplitView.minimumHeight: 180
                     SplitView.fillHeight: true
+                }
+
+                Connections {
+                    target: centerSplit
+                    function onHeightChanged() { root.scheduleSaveLayout() }
                 }
             }
 
@@ -1150,10 +1268,10 @@ Item {
                 id: rightPane
                 SplitView.minimumWidth:  !root.showRightColumn ? 0 : (root.rightExpanded ? 320 : 38)
                 SplitView.preferredWidth: !root.showRightColumn ? 0 : (root.rightExpanded ? Math.max(360, root.rightDockW) : 38)
-                SplitView.maximumWidth:  !root.showRightColumn ? 0 : (root.rightExpanded ? 640 : 40)
+                SplitView.maximumWidth:  !root.showRightColumn ? 0 : (root.rightExpanded ? 680 : 40)
                 onWidthChanged: {
                     if (root.showRightColumn && root.rightExpanded && width > 50)
-                        root.rightDockW = Math.min(640, Math.max(320, width))
+                        root.rightDockW = Math.min(680, Math.max(320, width))
                 }
                 clip: true
 
@@ -1167,75 +1285,152 @@ Item {
                     Rectangle {
                         visible: root.showRightColumn && !root.rightExpanded
                         anchors.fill: parent
-                        color: theme.colors.surfaceRaised
+                        color: theme.colors.timelineBg
+                        border.color: theme.colors.borderSubtle
+                        border.width: 0
 
-                        ToolButton {
-                            anchors.centerIn: parent; width: 34; height: 34
-                            text: ">>"
-                            font.pixelSize: 12
-                            ToolTip.text: qsTr("Expand AI panel"); ToolTip.visible: hovered
-                            onClicked: root.rightExpanded = true
-                            background: Rectangle { color: parent.hovered ? theme.colors.accentMuted : "transparent" }
-                            contentItem: Text {
-                                text: parent.text; font: parent.font; color: theme.colors.textPrimary
-                                horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter
-                            }
-                        }
-                        Rectangle { anchors.right: parent.right; width: 1; height: parent.height; color: theme.colors.borderSoft }
-                    }
-
-                    // Expanded — AI agent only (full height); inspector / FX live in left & mid columns
-                    ColumnLayout {
-                        anchors.fill: parent
-                        spacing: 0
-                        visible: root.showRightColumn && root.rightExpanded
-
-                        RowLayout {
-                            Layout.fillWidth: true
-                            Layout.preferredHeight: 28
+                        ColumnLayout {
+                            anchors.fill: parent
                             spacing: 0
+                            anchors.topMargin: 8
 
                             ToolButton {
-                                id: aiCollapseBtn
-                                Layout.preferredWidth: 30
-                                Layout.preferredHeight: 28
+                                Layout.alignment: Qt.AlignHCenter
+                                width: 28
+                                height: 28
+                                text: "\u203a"
+                                font.pixelSize: 18
                                 flat: true
-                                text: "\u2039"
-                                font.pixelSize: 16
-                                font.weight: Font.Light
-                                ToolTip.text: qsTr("Collapse panel"); ToolTip.visible: hovered
-                                onClicked: root.rightExpanded = false
+                                ToolTip.text: qsTr("Expand AI panel"); ToolTip.visible: hovered
+                                onClicked: root.rightExpanded = true
                                 background: Rectangle {
-                                    color: aiCollapseBtn.hovered ? theme.colors.chromePopupHover : "transparent"
-                                    radius: 2
+                                    radius: 4
+                                    color: parent.hovered ? theme.colors.accentMuted : "transparent"
                                 }
                                 contentItem: Text {
-                                    text: aiCollapseBtn.text
-                                    font: aiCollapseBtn.font
-                                    color: theme.colors.textSecondary
+                                    text: parent.text; font: parent.font; color: theme.colors.accent
                                     horizontalAlignment: Text.AlignHCenter
                                     verticalAlignment: Text.AlignVCenter
                                 }
                             }
 
-                            Item { Layout.fillWidth: true; height: 1 }
-
                             Rectangle {
-                                Layout.preferredWidth: 8
-                                Layout.preferredHeight: 8
-                                Layout.rightMargin: 10
+                                Layout.alignment: Qt.AlignHCenter
+                                Layout.topMargin: 10
+                                width: 8
+                                height: 8
                                 radius: 4
                                 color: mainWindow && mainWindow.aiBusy ? theme.colors.warning : theme.colors.success
-                                border.width: 1
-                                border.color: theme.colors.chromePopupBorder
                             }
                         }
 
                         Rectangle {
+                            anchors.right: parent.right
+                            width: 1
+                            height: parent.height
+                            color: theme.colors.borderSoft
+                        }
+                    }
+
+                    // Expanded — AI assistant (full height)
+                    ColumnLayout {
+                        anchors.fill: parent
+                        spacing: 0
+                        visible: root.showRightColumn && root.rightExpanded
+
+                        Rectangle {
                             Layout.fillWidth: true
-                            height: 1
-                            color: theme.colors.chromeEdge
-                            opacity: 0.55
+                            Layout.preferredHeight: 44
+                            color: theme.colors.surfaceRaised
+
+                            Rectangle {
+                                anchors.top: parent.top
+                                width: parent.width
+                                height: 1
+                                gradient: Gradient {
+                                    orientation: Gradient.Horizontal
+                                    GradientStop { position: 0.0; color: "transparent" }
+                                    GradientStop { position: 0.35; color: theme.colors.chromeEdge }
+                                    GradientStop { position: 0.65; color: theme.colors.accent }
+                                    GradientStop { position: 1.0; color: "transparent" }
+                                }
+                            }
+
+                            RowLayout {
+                                anchors.fill: parent
+                                anchors.leftMargin: 12
+                                anchors.rightMargin: 6
+                                spacing: 8
+
+                                Rectangle {
+                                    width: 8
+                                    height: 8
+                                    radius: 4
+                                    color: mainWindow && mainWindow.aiBusy ? theme.colors.warning : theme.colors.success
+                                    border.width: 1
+                                    border.color: theme.colors.borderSoft
+                                    Layout.alignment: Qt.AlignVCenter
+                                }
+
+                                Label {
+                                    text: qsTr("AI ASSISTANT")
+                                    color: theme.colors.accentText
+                                    font.pixelSize: 10
+                                    font.weight: Font.Bold
+                                    font.letterSpacing: 1.2
+                                    Layout.alignment: Qt.AlignVCenter
+                                }
+
+                                Item { Layout.fillWidth: true }
+
+                                Rectangle {
+                                    height: 18
+                                    width: modelBadgeText.implicitWidth + 12
+                                    radius: 9
+                                    color: theme.colors.accentMuted
+                                    border.color: theme.colors.borderSoft
+                                    border.width: 1
+                                    Layout.alignment: Qt.AlignVCenter
+                                    Text {
+                                        id: modelBadgeText
+                                        anchors.centerIn: parent
+                                        text: qsTr("Assistant")
+                                        font.pixelSize: 9
+                                        font.weight: Font.Medium
+                                        color: theme.colors.accent
+                                    }
+                                }
+
+                                ToolButton {
+                                    id: aiCollapseBtn
+                                    Layout.preferredWidth: 28
+                                    Layout.preferredHeight: 28
+                                    flat: true
+                                    text: "\u2039"
+                                    font.pixelSize: 16
+                                    font.weight: Font.Light
+                                    ToolTip.text: qsTr("Collapse panel"); ToolTip.visible: hovered
+                                    onClicked: root.rightExpanded = false
+                                    background: Rectangle {
+                                        color: aiCollapseBtn.hovered ? theme.colors.chromePopupHover : "transparent"
+                                        radius: 4
+                                    }
+                                    contentItem: Text {
+                                        text: aiCollapseBtn.text
+                                        font: aiCollapseBtn.font
+                                        color: theme.colors.textSecondary
+                                        horizontalAlignment: Text.AlignHCenter
+                                        verticalAlignment: Text.AlignVCenter
+                                    }
+                                }
+                            }
+
+                            Rectangle {
+                                anchors.bottom: parent.bottom
+                                width: parent.width
+                                height: 1
+                                color: theme.colors.borderSubtle
+                            }
                         }
 
                         AIPromptPanel {

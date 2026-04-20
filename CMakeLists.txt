@@ -188,14 +188,6 @@ qt_add_qml_module(
 
 set_target_properties(Fognitix PROPERTIES WIN_EXECUTABLE TRUE)
 
-# Headless engine sidecar for the Tauri/React shell (stdio JSON-RPC–style lines).
-add_executable(fognitix-engine engine/sidecar/main.cpp)
-target_compile_features(fognitix-engine PRIVATE cxx_std_20)
-set_target_properties(
-    fognitix-engine
-    PROPERTIES OUTPUT_NAME "fognitix-engine" AUTOMOC OFF AUTOUIC OFF AUTORCC OFF)
-install(TARGETS fognitix-engine RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
-
 target_include_directories(
     Fognitix
     PRIVATE

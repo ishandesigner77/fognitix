@@ -1,101 +1,99 @@
 import QtQuick
 
-// Fognitix — Cursor-inspired premium palette
+// Fognitix — professional NLE / motion palette (Resolve / Premiere / AE-class)
 // ──────────────────────────────────────────────────────────────────────────
-// Neutral near-black surfaces layered by a few points of lightness.
-// Hairline borders. One warm champagne accent for focus/selection only.
-// No blue, no purple, no neon. Subtle value shifts, not color shifts.
-// Reference: Cursor — chat #181818, editor #141414, chat input #1f1f1f.
+// Five-tone neutral stack: #171717 #1a1a1a #1c1c1c #242424 #262626
+// Hairline borders. One cool functional accent (timecode, CTI, focus) like industry tools.
 QtObject {
 
-    // ─── Base surfaces — Cursor-style neutral layering ───────────────────────
-    readonly property color appBg:          "#141414"   // outer window / editor body
-    readonly property color panelBg:        "#181818"   // standard panel body
-    readonly property color panelAlt:       "#161616"   // alt panel body
-    readonly property color surfaceRaised:  "#1c1c1c"   // header strip, toolbar
-    readonly property color surfaceHigh:    "#202020"   // buttons, cards, chips
-    readonly property color surfacePeak:    "#262626"   // hover / pressed
+    // ─── Base surfaces — strict neutral ladder ───────────────────────────────
+    readonly property color appBg:          "#1c1c1c"   // workspace chrome
+    readonly property color panelBg:        "#262626"   // primary panel fill
+    readonly property color panelAlt:         "#242424"   // alternate / inset rows
+    readonly property color surfaceRaised:  "#262626"   // panel headers, toolbars
+    readonly property color surfaceHigh:    "#2c2c2c"   // buttons, chips, raised controls
+    readonly property color surfacePeak:    "#343434"   // hover / pressed
 
-    // ─── Borders — hairline, just enough to separate ─────────────────────────
+    // ─── Borders — hairline separation ────────────────────────────────────────
     readonly property color borderHard:     "#000000"
-    readonly property color borderMid:      "#0f0f0f"
-    readonly property color borderSoft:     "#242424"
-    readonly property color borderFocusRing:"#d4c9b0"
+    readonly property color borderMid:      "#141414"
+    readonly property color borderSoft:     "#1a1a1a"
+    readonly property color borderFocusRing:"#47a8ff"
 
-    // ─── Text hierarchy ──────────────────────────────────────────────────────
-    readonly property color textPrimary:    "#ededed"
-    readonly property color textSecondary:  "#9a9a9a"
-    readonly property color textDisabled:   "#4d4d4d"
-    readonly property color textMuted:      "#6b6b6b"
-    readonly property color timecodeBright: "#f0f0f0"
+    // ─── Text hierarchy ───────────────────────────────────────────────────────
+    readonly property color textPrimary:    "#ececec"
+    readonly property color textSecondary:  "#a8a8a8"
+    readonly property color textDisabled:   "#5a5a5a"
+    readonly property color textMuted:      "#7a7a7a"
+    readonly property color timecodeBright: "#cfe8ff"
 
-    // ─── Single functional accent — warm champagne ───────────────────────────
-    readonly property color accent:         "#d4c9b0"
-    readonly property color accentHover:    "#e2d8c0"
-    readonly property color accentActive:   "#bdb09a"
-    readonly property color accentMuted:    "#24211a"
-    readonly property color accentText:     "#d4c9b0"
+    // ─── Functional accent — cool blue (timecode / CTI / selection) ───────────
+    readonly property color accent:         "#47a8ff"
+    readonly property color accentHover:    "#6bb8ff"
+    readonly property color accentActive:   "#2f8ae6"
+    readonly property color accentMuted:    "#1a2e40"
+    readonly property color accentText:     "#9fd4ff"
 
-    // ─── Status — desaturated ────────────────────────────────────────────────
-    readonly property color success:        "#7a8470"
-    readonly property color warning:        "#a8956a"
-    readonly property color danger:         "#9a6a5e"
-    readonly property color info:           "#7a7f88"
+    // ─── Status — desaturated ─────────────────────────────────────────────────
+    readonly property color success:        "#6d8f6d"
+    readonly property color warning:        "#b89a5a"
+    readonly property color danger:         "#c45a52"
+    readonly property color info:           "#6a7f92"
 
     // ─── Playhead / in-out ───────────────────────────────────────────────────
-    readonly property color playhead:       "#ededed"
-    readonly property color playheadLine:   "#ededed80"
+    readonly property color playhead:       "#47a8ff"
+    readonly property color playheadLine:   "#47a8ff99"
     readonly property color inOutPoint:     "#9a9a9a"
 
     // ─── Timeline surfaces ───────────────────────────────────────────────────
-    readonly property color timelineBg:     "#141414"
-    readonly property color timelineHeader: "#181818"
-    readonly property color timelineRuler:  "#141414"
-    readonly property color timelineBeat:   "#1a1a1a"
-    readonly property color trackRowEven:   "#181818"
-    readonly property color trackRowOdd:    "#161616"
+    readonly property color timelineBg:     "#171717"
+    readonly property color timelineHeader: "#1a1a1a"
+    readonly property color timelineRuler:  "#171717"
+    readonly property color timelineBeat:   "#1f1f1f"
+    readonly property color trackRowEven:   "#242424"
+    readonly property color trackRowOdd:    "#1e1e1e"
 
-    // ─── Clip colors — value-based, not hue-based ────────────────────────────
-    readonly property color clipVideo:      "#3a3a3a"
-    readonly property color clipVideoBg:    "#2a2a2a"
-    readonly property color clipAudio:      "#3a3835"
-    readonly property color clipAudioBg:    "#2a2825"
-    readonly property color clipText:       "#343434"
-    readonly property color clipTextBg:     "#262626"
-    readonly property color clipAdj:        "#403a30"
-    readonly property color clipAdjBg:      "#2e2a22"
-    readonly property color waveformColor:  "#8a8580"
+    // ─── Clip colors — readable on dark tracks ────────────────────────────────
+    readonly property color clipVideo:      "#4a6fa8"
+    readonly property color clipVideoBg:    "#2a3550"
+    readonly property color clipAudio:      "#4d8f6a"
+    readonly property color clipAudioBg:    "#24362c"
+    readonly property color clipText:       "#6a5a90"
+    readonly property color clipTextBg:     "#2c2438"
+    readonly property color clipAdj:        "#a8844a"
+    readonly property color clipAdjBg:      "#3a3020"
+    readonly property color waveformColor:  "#7d9a86"
 
-    // ─── Track label strip — muted-saturated, visible (4px left strip) ──────
-    readonly property color trackVideo:     "#5a7aa0"   // dusty blue
-    readonly property color trackAudio:     "#6ea078"   // muted sage
-    readonly property color trackText:      "#9278a8"   // muted violet
-    readonly property color trackAdj:       "#b08a55"   // warm amber
+    // ─── Track label strip (left gutter) ─────────────────────────────────────
+    readonly property color trackVideo:     "#5a7aa0"
+    readonly property color trackAudio:     "#5e9a72"
+    readonly property color trackText:      "#8a78a8"
+    readonly property color trackAdj:       "#b08a55"
     readonly property color trackNull:      "#3a3a3a"
 
-    // ─── Keyframes ───────────────────────────────────────────────────────────
-    readonly property color keyframe:       "#9a9a9a"
+    // ─── Keyframes ─────────────────────────────────────────────────────────────
+    readonly property color keyframe:         "#8a8a8a"
     readonly property color keyframeHover:  "#c8c8c8"
-    readonly property color keyframeSelect: "#d4c9b0"
+    readonly property color keyframeSelect: "#47a8ff"
 
-    // ─── Scrollbar ───────────────────────────────────────────────────────────
-    readonly property color scrollbar:      "#2a2a2a"
+    // ─── Scrollbar ─────────────────────────────────────────────────────────────
+    readonly property color scrollbar:        "#2a2a2a"
     readonly property color scrollbarHover: "#3a3a3a"
 
-    // ─── AI panel ────────────────────────────────────────────────────────────
-    readonly property color aiBubble:       "#1c1c1c"
-    readonly property color aiAccent:       "#d4c9b0"
-    readonly property color aiMuted:        "#181818"
-    readonly property color aiPanelDeep:    "#0e0e10"   // full-height AI column base
-    readonly property color chromePopup:    "#121214"   // menus / combo popups
-    readonly property color chromePopupHover: "#1e1e22"
-    readonly property color chromePopupBorder: "#2c2c32"
-    readonly property color chromeEdge:     "#3d3a34"   // subtle gold-grey edge (pro tool feel)
+    // ─── AI / chrome popups ───────────────────────────────────────────────────
+    readonly property color aiBubble:         "#1e1e1e"
+    readonly property color aiAccent:         "#47a8ff"
+    readonly property color aiMuted:          "#242424"
+    readonly property color aiPanelDeep:      "#171717"
+    readonly property color chromePopup:      "#262626"
+    readonly property color chromePopupHover: "#303030"
+    readonly property color chromePopupBorder:"#1a1a1a"
+    readonly property color chromeEdge:       "#2a3d52"
 
     // ─── Aliases — DO NOT REMOVE ─────────────────────────────────────────────
     readonly property color windowRoot:         appBg
-    readonly property color menuBarBackground:  "#141414"
-    readonly property color statusBarBackground: "#0a0a0a"   // darkest chrome — anchors the bottom
+    readonly property color menuBarBackground:  "#262626"
+    readonly property color statusBarBackground:"#171717"
     readonly property color primaryBackground:  appBg
     readonly property color panelBackground:    panelBg
     readonly property color secondaryPanel:     panelAlt
@@ -118,9 +116,9 @@ QtObject {
 
     readonly property color timelineChrome:     timelineBg
     readonly property color timelineBackground: timelineBg
-    readonly property color timelineMinimapBg:  "#101010"
-    readonly property color timelineRulerFg:    textDisabled
-    readonly property color snapLine:           Qt.rgba(1, 1, 1, 0.12)
+    readonly property color timelineMinimapBg:  "#171717"
+    readonly property color timelineRulerFg:    textMuted
+    readonly property color snapLine:           Qt.rgba(0.28, 0.66, 1.0, 0.22)
 
     readonly property color clipVideoTop:       clipVideo
     readonly property color clipVideoBot:       clipVideoBg
@@ -129,20 +127,20 @@ QtObject {
 
     readonly property color viewerBlack:        "#000000"
     readonly property color previewSurround:    "#000000"
-    readonly property color scopeBackground:    "#101010"
+    readonly property color scopeBackground:    "#171717"
 
     readonly property color splitter:           borderHard
     readonly property color splitterHover:      Qt.rgba(1, 1, 1, 0.06)
     readonly property color splitterActive:     accent
 
     readonly property color edgeHighlight:      borderSoft
-    readonly property color selectionOverlay:   Qt.rgba(212, 201, 176, 0.06)
+    readonly property color selectionOverlay:   Qt.rgba(0.28, 0.66, 1.0, 0.10)
 
     readonly property color supremeTextPrimary:   textPrimary
     readonly property color supremeTextSecondary: textSecondary
     readonly property color supremeTextTertiary:  textMuted
     readonly property color supremeTextDisabled:  textDisabled
-    readonly property color supremeTimecode:      textPrimary
+    readonly property color supremeTimecode:      timecodeBright
     readonly property color supremeAccent:        accent
     readonly property color supremeAccentHover:   accentHover
     readonly property color supremeAccentActive:  accentActive
@@ -152,13 +150,13 @@ QtObject {
     readonly property color supremeBorderSubtle:  borderMid
     readonly property color supremeBorderDefault: borderSoft
     readonly property color supremeBorderMedium:  surfaceHigh
-    readonly property color supremeBorderStrong:  surfacePeak
+    readonly property color supremeBorderStrong: surfacePeak
     readonly property color supremeBgApp:         appBg
     readonly property color supremeBgPanel:       panelBg
     readonly property color supremeBgSurface:     surfaceRaised
     readonly property color supremeBgSurface2:    panelAlt
     readonly property color supremeBgSurface3:    surfaceRaised
-    readonly property color supremeBgMenu:        "#141414"
+    readonly property color supremeBgMenu:        menuBarBackground
     readonly property color supremeBgTimeline:    timelineBg
     readonly property color supremeBgPreview:     "#000000"
     readonly property color supremeBgPanelHdr:    surfaceRaised

@@ -22,10 +22,6 @@ vcpkg_installed/
 .DS_Store
 __pycache__/
 *.pyc
-/desktop/node_modules/
-/desktop/dist/
-/desktop/tsconfig.tsbuildinfo
-/desktop/src-tauri/target/
 *.qmlc
 *.jsc
 install_manifest.txt
@@ -37,6 +33,3 @@ build_out.log
 cmake_configure.log
 cmake_out.txt
 cmake_out.*
-
-# Tauri generated schemas (recreated by CLI/build)
-desktop/src-tauri/gen/

@@ -104,7 +104,7 @@ Item {
                         title: qsTr("Track label")
                         MenuItem {
                             text: qsTr("Blue")
-                            onTriggered: if (mainWindow) mainWindow.setTrackLabelColor(root.trackId, "#d4c9b0")
+                            onTriggered: if (mainWindow) mainWindow.setTrackLabelColor(root.trackId, theme.colors.accent.toString())
                         }
                         MenuItem {
                             text: qsTr("Green")
@@ -112,7 +112,7 @@ Item {
                         }
                         MenuItem {
                             text: qsTr("Purple")
-                            onTriggered: if (mainWindow) mainWindow.setTrackLabelColor(root.trackId, "#d4c9b0")
+                            onTriggered: if (mainWindow) mainWindow.setTrackLabelColor(root.trackId, theme.colors.accent.toString())
                         }
                         MenuItem {
                             text: qsTr("Orange")

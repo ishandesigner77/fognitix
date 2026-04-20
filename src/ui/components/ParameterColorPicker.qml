@@ -1,17 +1,20 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Fognitix
 
 RowLayout {
     spacing: 8
+    Theme { id: theme }
+
     Label {
         text: qsTr("Color")
-        color: "#ededef"
+        color: theme.colors.textPrimary
     }
     Rectangle {
         width: 28
         height: 28
-        color: "#d4c9b0"
-        border.color: "#1a1b1c"
+        color: theme.colors.accent
+        border.color: theme.colors.borderSoft
     }
 }
