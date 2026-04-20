@@ -103,16 +103,16 @@ Item {
                         id: labelMenu
                         title: qsTr("Track label")
                         MenuItem {
-                            text: qsTr("Blue")
-                            onTriggered: if (mainWindow) mainWindow.setTrackLabelColor(root.trackId, theme.colors.accent.toString())
+                            text: qsTr("Sand")
+                            onTriggered: if (mainWindow) mainWindow.setTrackLabelColor(root.trackId, "#8b806c")
                         }
                         MenuItem {
                             text: qsTr("Green")
-                            onTriggered: if (mainWindow) mainWindow.setTrackLabelColor(root.trackId, "#7a8470")
+                            onTriggered: if (mainWindow) mainWindow.setTrackLabelColor(root.trackId, "#6e9a78")
                         }
                         MenuItem {
-                            text: qsTr("Purple")
-                            onTriggered: if (mainWindow) mainWindow.setTrackLabelColor(root.trackId, theme.colors.accent.toString())
+                            text: qsTr("Violet")
+                            onTriggered: if (mainWindow) mainWindow.setTrackLabelColor(root.trackId, "#9278a8")
                         }
                         MenuItem {
                             text: qsTr("Orange")
@@ -176,8 +176,8 @@ Item {
                             height: 18
                             checkable: true
                             checked: root.trackVisible
-                            text: root.trackVisible ? "\uD83D\uDC41" : "\u2012"
-                            font.pixelSize: 9
+                            text: root.trackVisible ? qsTr("On") : qsTr("Off")
+                            font.pixelSize: 8
                             ToolTip.text: qsTr("Toggle visibility")
                             ToolTip.visible: hovered
                             ToolTip.delay: 500
@@ -206,13 +206,13 @@ Item {
                             ToolTip.delay: 500
                             onCheckedChanged: root.trackMuted = checked
                             background: Rectangle {
-                                color: muteBtn.checked ? "#6a2a0a" : "transparent"
+                                color: muteBtn.checked ? theme.colors.accentMuted : "transparent"
                                 radius: 2
                             }
                             contentItem: Text {
                                 text: muteBtn.text
                                 font: muteBtn.font
-                                color: muteBtn.checked ? "#ff8040" : theme.colors.textDisabled
+                                color: muteBtn.checked ? theme.colors.accent : theme.colors.textDisabled
                                 horizontalAlignment: Text.AlignHCenter
                                 verticalAlignment: Text.AlignVCenter
                             }
@@ -348,7 +348,7 @@ Item {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         height: 96
-        color: "#080810"
+        color: theme.colors.aiPanelDeep
         border.color: theme.colors.borderSubtle
 
         Label {

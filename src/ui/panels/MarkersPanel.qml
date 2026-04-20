@@ -9,14 +9,14 @@ Rectangle {
     Theme { id: theme }
 
     readonly property var markerColors: [
-        { name: "Blue",   hex: "#47a8ff" },
-        { name: "Red",    hex: "#9a6a5e" },
-        { name: "Orange", hex: "#a8956a" },
-        { name: "Yellow", hex: "#f59e0b" },
-        { name: "Green",  hex: "#7a8470" },
-        { name: "Purple", hex: "#9b7fd4" },
-        { name: "Pink",   hex: "#ec4899" },
-        { name: "White",  hex: "#e8e8ea" }
+        { name: "Champagne", hex: "#d4c9b0" },
+        { name: "Red",       hex: "#c45a52" },
+        { name: "Orange",    hex: "#b88a5a" },
+        { name: "Amber",     hex: "#b89a5a" },
+        { name: "Green",     hex: "#7a8f6d" },
+        { name: "Violet",    hex: "#9278a8" },
+        { name: "Rose",      hex: "#b07a8a" },
+        { name: "White",     hex: "#e8e8ea" }
     ]
 
     ColumnLayout {
@@ -156,7 +156,7 @@ Rectangle {
                     // Color dot
                     Rectangle {
                         width: 10; height: 10; radius: 5
-                        color: modelData.color || "#47a8ff"
+                        color: modelData.color || "#d4c9b0"
                     }
 
                     // Timecode
@@ -269,7 +269,7 @@ Rectangle {
                         }
                     }
 
-                    property string currentColor: modelData ? (modelData.color || "#47a8ff") : "#47a8ff"
+                    property string currentColor: modelData ? (modelData.color || "#d4c9b0") : "#d4c9b0"
                 }
 
                 MouseArea {

@@ -42,9 +42,9 @@ void ensureAeStyleDefaultTracks(Fognitix::Timeline::Timeline& timeline)
 {
     using Fognitix::Timeline::TrackType;
     // Distinct but muted label-strip colors (visible yet editorial).
-    const QString vidCol = QStringLiteral("#5a7aa0");  // dusty blue
+    const QString vidCol = QStringLiteral("#8b806c");  // warm graphite
     const QString audCol = QStringLiteral("#6ea078");  // muted sage green
-    const QString txtCol = QStringLiteral("#9278a8");  // muted violet
+    const QString txtCol = QStringLiteral("#9d8570");  // muted sand
     const QString adjCol = QStringLiteral("#b08a55");  // warm amber
     timeline.addTrack(QStringLiteral("V3"), TrackType::Video, 52, vidCol);
     timeline.addTrack(QStringLiteral("V2"), TrackType::Video, 52, vidCol);
@@ -1255,7 +1255,7 @@ QString MainWindow::addTextLayer(const QString& text)
     }
     if (trackId.isEmpty()) {
         trackId = m_timeline->addTrack(
-            QStringLiteral("TEXT"), Fognitix::Timeline::TrackType::Text, 48, QStringLiteral("#3d1a5c"));
+            QStringLiteral("TEXT"), Fognitix::Timeline::TrackType::Text, 48, QStringLiteral("#9d8570"));
     }
     const double start = m_state.playheadSeconds();
     const QString clipId = m_timeline->addClip(trackId, QStringLiteral("text:") + text, start, 3.0);

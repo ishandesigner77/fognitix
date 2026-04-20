@@ -137,9 +137,10 @@ Rectangle {
                         color: Qt.alpha(theme.colors.trackVideo, 0.2)
                         Label {
                             anchors.centerIn: parent
-                            text: isVideo ? "\uD83C\uDFA5" : "\u266A"
-                            font.pixelSize: 22
-                            color: theme.colors.textSecondary
+                            text: isVideo ? qsTr("Video") : qsTr("Audio")
+                            font.pixelSize: 10
+                            font.family: theme.typography.fontFamily
+                            color: theme.colors.textMuted
                         }
                     }
 

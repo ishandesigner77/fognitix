@@ -33,13 +33,13 @@ Rectangle {
                 labelColor: r.labelColor,
                 clipsJson: JSON.stringify(r.clips || [])
             })
-            let col = "#2c3542"
+            let col = theme.colors.clipVideoBg
             if (r.trackType === "audio")
-                col = "#4a5854"
+                col = theme.colors.clipAudioBg
             else if (r.trackType === "text")
-                col = "#45424e"
+                col = theme.colors.clipTextBg
             else if (r.trackType === "adjustment")
-                col = "#5a5852"
+                col = theme.colors.clipAdjBg
             const clips = r.clips || []
             for (let j = 0; j < clips.length; j++) {
                 const c = clips[j]
@@ -603,7 +603,7 @@ Rectangle {
                 Rectangle {
                     x: 0; y: 0
                     width: 14; height: 12
-                    color: "#c86050"
+                    color: theme.colors.playhead
                     radius: 1
                 }
                 Canvas {
@@ -612,7 +612,7 @@ Rectangle {
                     onPaint: {
                         var c = getContext("2d")
                         c.reset()
-                        c.fillStyle = "#c86050"
+                        c.fillStyle = theme.colors.playhead
                         c.beginPath()
                         c.moveTo(0, 0)
                         c.lineTo(14, 0)
@@ -627,7 +627,7 @@ Rectangle {
                     y: 17
                     width: 2
                     height: parent.height - 17
-                    color: "#c86050"
+                    color: theme.colors.playhead
                 }
 
                 MouseArea {

@@ -107,28 +107,28 @@ Rectangle {
 
     ColumnLayout {
         anchors.fill: parent
-        anchors.margins: 6
-        spacing: 6
+        anchors.margins: 10
+        spacing: 10
 
         Rectangle {
             Layout.fillWidth: true
-            height: 30
+            height: 36
             color: theme.colors.chromePopup
             border.color: theme.colors.chromePopupBorder
             radius: 4
 
             Row {
                 anchors.fill: parent
-                anchors.leftMargin: 4
-                anchors.rightMargin: 4
-                spacing: 4
+                anchors.leftMargin: 6
+                anchors.rightMargin: 6
+                spacing: 6
                 Repeater {
                     model: aiTabsModel
                     delegate: Rectangle {
                         required property int index
                         required property string title
-                        width: tabText.implicitWidth + 34
-                        height: 24
+                        width: tabText.implicitWidth + 38
+                        height: 28
                         anchors.verticalCenter: parent.verticalCenter
                         radius: 3
                         color: root.activeTabIndex === index ? theme.colors.accentMuted : "transparent"
@@ -140,7 +140,7 @@ Rectangle {
                             anchors.leftMargin: 8
                             anchors.verticalCenter: parent.verticalCenter
                             text: title
-                            font.pixelSize: 10
+                            font.pixelSize: 11
                             color: root.activeTabIndex === index ? theme.colors.accent : theme.colors.textSecondary
                         }
                         ToolButton {
@@ -161,8 +161,8 @@ Rectangle {
                 }
                 ToolButton {
                     anchors.verticalCenter: parent.verticalCenter
-                    width: 22
-                    height: 22
+                    width: 26
+                    height: 26
                     flat: true
                     text: "+"
                     ToolTip.text: qsTr("New AI tab")
@@ -177,9 +177,9 @@ Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
             clip: true
-            spacing: 4
-            bottomMargin: 6
-            topMargin: 4
+            spacing: 8
+            bottomMargin: 8
+            topMargin: 6
             model: chatModel
 
             ScrollBar.vertical: ScrollBar {
@@ -193,29 +193,29 @@ Rectangle {
             delegate: Item {
                 id: msgItem
                 width: chatView.width
-                height: bubble.height + 12
+                height: bubble.height + 14
 
                 readonly property bool isUser: model.role === "user"
 
                 Rectangle {
                     id: bubble
                     anchors.top: parent.top
-                    anchors.topMargin: 6
+                    anchors.topMargin: 8
                     anchors.left: msgItem.isUser ? undefined : parent.left
                     anchors.right: msgItem.isUser ? parent.right : undefined
-                    anchors.leftMargin: msgItem.isUser ? 0 : 6
-                    anchors.rightMargin: msgItem.isUser ? 6 : 0
-                    width: Math.min(chatView.width * 0.88, 560)
+                    anchors.leftMargin: msgItem.isUser ? 0 : 8
+                    anchors.rightMargin: msgItem.isUser ? 8 : 0
+                    width: Math.min(chatView.width * 0.92, 720)
                     color: msgItem.isUser ? theme.colors.accentMuted : theme.colors.aiBubble
                     border.color: msgItem.isUser ? theme.colors.accent : theme.colors.chromePopupBorder
-                    radius: 6
-                    height: msgContent.implicitHeight + 16
+                    radius: 8
+                    height: msgContent.implicitHeight + 18
 
                     Label {
                         id: msgContent
-                        width: parent.width - 16
-                        x: 8
-                        y: 8
+                        width: parent.width - 20
+                        x: 10
+                        y: 9
                         text: model.content
                         color: theme.colors.textPrimary
                         font.pixelSize: theme.typography.body
@@ -236,7 +236,7 @@ Rectangle {
                     anchors.leftMargin: 6
                     anchors.verticalCenter: parent.verticalCenter
                     width: 84
-                    height: 26
+                    height: 28
                     color: theme.colors.aiBubble
                     border.color: theme.colors.borderSubtle
                     radius: 6
@@ -253,7 +253,7 @@ Rectangle {
         Rectangle {
             id: inputArea
             Layout.fillWidth: true
-            Layout.preferredHeight: inputCol.implicitHeight + 14
+            Layout.preferredHeight: inputCol.implicitHeight + 18
             color: theme.colors.chromePopup
             radius: 4
             border.color: theme.colors.chromePopupBorder
@@ -262,12 +262,12 @@ Rectangle {
             Column {
                 id: inputCol
                 anchors.fill: parent
-                anchors.margins: 8
-                spacing: 6
+                anchors.margins: 10
+                spacing: 8
 
                     Rectangle {
                         width: parent.width
-                        height: 72
+                        height: 112
                         color: theme.colors.aiPanelDeep
                         border.color: promptInput.activeFocus ? theme.colors.borderFocus : theme.colors.chromePopupBorder
                         border.width: 1
@@ -275,12 +275,12 @@ Rectangle {
 
                     ScrollView {
                         anchors.fill: parent
-                        anchors.margins: 8
+                        anchors.margins: 10
                         clip: true
 
                         TextArea {
                             id: promptInput
-                            placeholderText: qsTr("Command…")
+                            placeholderText: qsTr("Ask AI to edit, analyze, or generate...")
                             color: theme.colors.textPrimary
                             placeholderTextColor: theme.colors.textDisabled
                             font.pixelSize: theme.typography.body
@@ -316,8 +316,8 @@ Rectangle {
                         text: root.isThinking ? qsTr("Wait") : qsTr("Send")
                         variant: "primary"
                         enabled: !root.isThinking && promptInput.text.trim().length > 0
-                        implicitWidth: 88
-                        implicitHeight: 30
+                        implicitWidth: 100
+                        implicitHeight: 34
                         onClicked: sendMessage()
                     }
                 }

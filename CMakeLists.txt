@@ -137,6 +137,8 @@ set(FOGNITIX_QML_FILES
     src/ui/components/FxButton.qml
     src/ui/components/FxTabBar.qml
     src/ui/components/FxTextField.qml
+    src/ui/components/DockTabStack.qml
+    src/ui/components/PanelFrame.qml
     src/ui/components/HomeScreen.qml
     src/ui/dialogs/NewProjectDialog.qml
     src/ui/dialogs/CompositionSettingsDialog.qml
@@ -302,6 +304,28 @@ install(
     TARGETS Fognitix
     BUNDLE DESTINATION .
     RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
+
+if(WIN32)
+    # Include deployed Qt/vcpkg runtime artifacts copied beside the built exe.
+    install(
+        DIRECTORY "$<TARGET_FILE_DIR:Fognitix>/"
+        DESTINATION "${CMAKE_INSTALL_BINDIR}"
+        FILES_MATCHING
+        PATTERN "*.dll"
+        PATTERN "*.exe"
+        PATTERN "platforms/*"
+        PATTERN "styles/*"
+        PATTERN "imageformats/*"
+        PATTERN "iconengines/*"
+        PATTERN "multimedia/*"
+        PATTERN "networkinformation/*"
+        PATTERN "tls/*"
+        PATTERN "qml/*")
+endif()
+
+# Runtime UI/media assets required by the app at startup.
+install(DIRECTORY "${CMAKE_SOURCE_DIR}/assets" DESTINATION . OPTIONAL)
+install(DIRECTORY "${CMAKE_SOURCE_DIR}/PNG" DESTINATION . OPTIONAL)
 
 enable_testing()
 

@@ -15,13 +15,26 @@ Page instfiles
 
 Section "Install"
     SetOutPath "$INSTDIR"
-    ; Pack additional runtime files (Qt platforms, QML, shaders, assets) from your staging prefix as needed.
-    File /nonfatal "..\dist\bin\Fognitix.exe"
+    ; Package full staged runtime tree from cmake install prefix.
+    File /r /nonfatal "..\dist\bin\*.*"
+    File /r /nonfatal "..\dist\assets\*.*"
+    File /r /nonfatal "..\dist\PNG\*.*"
     WriteUninstaller "$INSTDIR\Uninstall.exe"
 SectionEnd
 
 Section "Uninstall"
     Delete "$INSTDIR\Uninstall.exe"
-    Delete "$INSTDIR\Fognitix.exe"
+    RMDir /r "$INSTDIR\platforms"
+    RMDir /r "$INSTDIR\styles"
+    RMDir /r "$INSTDIR\imageformats"
+    RMDir /r "$INSTDIR\iconengines"
+    RMDir /r "$INSTDIR\multimedia"
+    RMDir /r "$INSTDIR\networkinformation"
+    RMDir /r "$INSTDIR\tls"
+    RMDir /r "$INSTDIR\qml"
+    RMDir /r "$INSTDIR\assets"
+    RMDir /r "$INSTDIR\PNG"
+    Delete "$INSTDIR\*.dll"
+    Delete "$INSTDIR\*.exe"
     RMDir "$INSTDIR"
 SectionEnd

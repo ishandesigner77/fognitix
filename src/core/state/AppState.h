@@ -19,7 +19,7 @@ namespace Fognitix::State {
 struct Marker {
     double time = 0.0;        // seconds
     QString name;
-    QString color = QStringLiteral("#3b82f6");
+    QString color = QStringLiteral("#d4c9b0");
     QString notes;
     double duration = 0.0;    // 0 = point marker
 };
@@ -74,7 +74,7 @@ public:
     void setTimelineDuration(double v);
 
     // Markers
-    Q_INVOKABLE int addMarker(double time, const QString& name = {}, const QString& color = QStringLiteral("#3b82f6"));
+    Q_INVOKABLE int addMarker(double time, const QString& name = {}, const QString& color = QStringLiteral("#d4c9b0"));
     Q_INVOKABLE void removeMarkerAt(int index);
     Q_INVOKABLE void clearMarkers();
     Q_INVOKABLE void updateMarker(int index, const QString& name, const QString& color, const QString& notes);

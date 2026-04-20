@@ -20,7 +20,7 @@ TextField {
     background: Rectangle {
         implicitHeight: 32
         radius: 6
-        color: "#0F131A"
+        color: theme.colors.aiPanelDeep
         border.color: root.activeFocus ? theme.colors.borderFocus : theme.colors.borderHairline
         border.width: 1
         Behavior on border.color { ColorAnimation { duration: 120; easing.type: Easing.OutCubic } }

@@ -170,12 +170,12 @@ void Application::ensureDefaultProject()
     m_project->loadTimeline(*m_timeline);
     if (m_timeline->tracks().empty()) {
         using Fognitix::Timeline::TrackType;
-        m_timeline->addTrack(QStringLiteral("V3"), TrackType::Video, 48, QStringLiteral("#1e3a6e"));
-        m_timeline->addTrack(QStringLiteral("V2"), TrackType::Video, 48, QStringLiteral("#1e3a6e"));
-        m_timeline->addTrack(QStringLiteral("V1"), TrackType::Video, 72, QStringLiteral("#1e3a6e"));
+        m_timeline->addTrack(QStringLiteral("V3"), TrackType::Video, 48, QStringLiteral("#8b806c"));
+        m_timeline->addTrack(QStringLiteral("V2"), TrackType::Video, 48, QStringLiteral("#8b806c"));
+        m_timeline->addTrack(QStringLiteral("V1"), TrackType::Video, 72, QStringLiteral("#8b806c"));
         m_timeline->addTrack(QStringLiteral("A1"), TrackType::Audio, 56, QStringLiteral("#0f3d1f"));
         m_timeline->addTrack(QStringLiteral("A2"), TrackType::Audio, 48, QStringLiteral("#0f3d1f"));
-        m_timeline->addTrack(QStringLiteral("TEXT"), TrackType::Text, 48, QStringLiteral("#3d1a5c"));
+        m_timeline->addTrack(QStringLiteral("TEXT"), TrackType::Text, 48, QStringLiteral("#9d8570"));
         m_timeline->addTrack(QStringLiteral("ADJ"), TrackType::Adjustment, 36, QStringLiteral("#3d2800"));
         m_project->saveTimeline(*m_timeline);
     }

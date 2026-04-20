@@ -60,8 +60,8 @@ RowLayout {
     // Play / Pause — primary button
     ToolButton {
         id: btnPlay
-        implicitWidth: 38
-        implicitHeight: 38
+        implicitWidth: 30
+        implicitHeight: 30
         ToolTip.text: appState && appState.isPlaying ? qsTr("Pause  (Space)") : qsTr("Play  (Space)")
         ToolTip.visible: hovered
         ToolTip.delay: 500
@@ -72,7 +72,7 @@ RowLayout {
         }
         contentItem: Text {
             text: (appState && appState.isPlaying) ? theme.icons.pause : theme.icons.play
-            font.pixelSize: 15
+            font.pixelSize: 12
             color: "#ffffff"
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
@@ -162,8 +162,8 @@ RowLayout {
 
     // Timecode display — prominent, primary numeric readout
     Rectangle {
-        width: 164
-        height: 34
+        width: 154
+        height: 30
         color: "#0c0c0c"
         border.color: theme.colors.borderSoft
         border.width: 1
@@ -175,7 +175,7 @@ RowLayout {
             anchors.leftMargin: 10
             verticalAlignment: Text.AlignVCenter
             font.family: "Consolas, monospace"
-            font.pixelSize: 19
+            font.pixelSize: 16
             font.weight: Font.Medium
             font.letterSpacing: 0.5
             color: theme.colors.textPrimary

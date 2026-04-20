@@ -719,6 +719,35 @@ MenuBar {
         Action { text: qsTr("Go to Time…");              shortcut: "Ctrl+G";        enabled: false }
     }
 
+    // ── TIMELINE ──────────────────────────────────────────────────────────────
+    Menu {
+        title: qsTr("&Timeline")
+        Action {
+            text: qsTr("Split at Playhead")
+            shortcut: "Ctrl+K"
+            onTriggered: if (mainWindow) mainWindow.splitAtPlayhead()
+        }
+        Action {
+            text: qsTr("Add Marker")
+            shortcut: "M"
+            onTriggered: if (mainWindow) mainWindow.addMarkerAtPlayhead()
+        }
+        MenuSeparator {}
+        Action {
+            text: qsTr("Timeline Effects")
+            shortcut: "Ctrl+4"
+            onTriggered: if (menuHost.editor) menuHost.editor.focusEffectsPanel()
+        }
+        Action {
+            text: qsTr("Color Effects")
+            onTriggered: if (menuHost.editor) menuHost.editor.openLeftDockPanel(11)
+        }
+        Action {
+            text: qsTr("Audio Effects")
+            onTriggered: if (menuHost.editor) menuHost.editor.openLeftDockPanel(22)
+        }
+    }
+
     // ── WINDOW ────────────────────────────────────────────────────────────────
     Menu {
         title: qsTr("&Window")
